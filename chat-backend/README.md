@@ -1,28 +1,385 @@
-# 💬 Simple Chat Platform (Spring Boot + Angular)
+# 💬 Simple Chat Platform (Spring Boot Backend)
 
-| Section | Content                                                                                                                                                                                                                                                                                   |
-|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Overview | Lightweight real-time chat application built using Spring Boot (Java 17) and Angular. Uses in-memory BlockingQueue for async messaging and WebSocket for real-time updates. No database is used.                                                                                          |
-| Features | • Join chat with username (no auth)<br>• Send messages in real time<br>• Receive messages instantly via WebSockets<br>• Asynchronous message processing using BlockingQueue<br>• Clean layered architecture<br>• Stateless in-memory system                                               |
-| Architecture (High-Level Flow) | Angular Frontend → REST API → Controller → Service Layer → Message Producer → BlockingQueue → Async Consumer Thread → WebSocket Broadcaster → Clients                                                                                                                                     |
-| WebSocket Flow | Client → /ws-chat → Server → /topic/chat → All connected users                                                                                                                                                                                                                            |
-| Design Decision: BlockingQueue | ✔ Thread-safe<br>✔ Built-in concurrency control<br>✔ Simple async messaging model<br>❌ Trade-off: No persistence, single-instance only                                                                                                                                                    |
-| Design Decision: Async Processing | ✔ Non-blocking API<br>✔ Decoupled architecture<br>✔ Producer-consumer pattern<br>Flow: Request → Queue → Consumer → Broadcast                                                                                                                                                             |
-| Design Decision: WebSockets | ✔ Real-time updates<br>✔ No polling required<br>✔ Efficient message delivery using STOMP                                                                                                                                                                                                  |
-| Design Decision: Layered Architecture | Controller → Service → Messaging → WebSocket<br>✔ Separation of concerns<br>✔ Easy unit testing<br>✔ Maintainable structure                                                                                                                                                               |
-| Design Decision: No Database | ✔ Requirement compliance<br>✔ Focus on messaging system design<br>✔ In-memory storage only                                                                                                                                                                                                |
-| Backend Project Structure | com.jse.chat<br>├── controller (ChatController)<br>├── service (ChatService)<br>├── messaging (MessageProducer, MessageConsumer)<br>├── websocket (MessageBroadcaster)<br>├── dto (SendMessageRequest, JoinRequest)<br>├── domain (ChatMessage)<br>└── exception (GlobalExceptionHandler) |
-| How to Run Backend | cd chat-backend → mvn clean install → mvn spring-boot:run                                                                                                                                                                                                                                 |
-| Backend URL | http://localhost:8080                                                                                                                                                                                                                                                                     |
-| API: Join Chat | POST /api/chat/join                                                                                                                                                                                                                                                                       |
-| Join Request | { "username": "john" }                                                                                                                                                                                                                                                                    |
-| API: Send Message | POST /api/chat/send                                                                                                                                                                                                                                                                       |
-| Send Request | { "username": "john", "content": "Hello world" }                                                                                                                                                                                                                                          |
-| WebSocket Endpoint | ws://localhost:8080/ws-chat                                                                                                                                                                                                                                                               |
-| WebSocket Topic | /topic/chat                                                                                                                                                                                                                                                                               |
-| Frontend Setup | cd chat-frontend → npm install → ng serve                                                                                                                                                                                                                                                 |
-| Frontend URL | http://localhost:4200                                                                                                                                                                                                                                                                     |
-| Messaging Flow | User → REST API → Service → Queue → Consumer → WebSocket → All Clients                                                                                                                                                                                                                    |
-| Testing Strategy | Controller tests (MockMvc), Service tests (Mockito), Messaging tests (Queue + consumer), WebSocket tests (mocked)                                                                                                                                                                         |
-| Tools Used | JUnit 5, Mockito, Spring Boot Test, MockMvc                                                                                                                                                                                                                                               |
-| Key Learning Outcomes | Async system design, producer-consumer pattern, WebSockets, clean architecture, Spring Boot testing                                                                                                                                                                                       |
+## Overview
+
+A lightweight real-time chat backend built with **Spring Boot (Java 17)**. The application uses asynchronous message processing via a `BlockingQueue` and **WebSockets (STOMP)** for real-time communication. No database is used, making the solution simple, fast, and focused on messaging architecture and concurrency concepts.
+
+---
+
+## Features
+
+* Join chat with username (no authentication)
+* Send messages via REST API
+* Receive messages in real time through WebSockets
+* Asynchronous message processing using the Producer-Consumer pattern
+* In-memory active user tracking
+* Clean layered architecture
+
+---
+
+## Architecture
+
+### High-Level Flow
+
+```text
+REST API
+   ↓
+Controller
+   ↓
+Service Layer
+   ↓
+Message Producer
+   ↓
+BlockingQueue
+   ↓
+Async Consumer
+   ↓
+WebSocket Broadcaster
+   ↓
+Connected Clients
+```
+
+### WebSocket Flow
+
+```text
+Client
+   ↓
+/ws-chat
+   ↓
+STOMP Broker
+   ↓
+/topic/chat
+   ↓
+All Connected Clients
+```
+
+---
+
+## Design Decisions
+
+### BlockingQueue
+
+#### Benefits
+
+* Thread-safe
+* Built-in concurrency support
+* Decouples message producers from consumers
+* Simple asynchronous processing model
+
+#### Trade-Off
+
+* No persistence across application restarts
+
+---
+
+### Asynchronous Processing
+
+#### Benefits
+
+* Non-blocking REST endpoints
+* Producer-Consumer architecture
+* Separation between API and message broadcasting
+* Better responsiveness under load
+
+---
+
+### WebSockets
+
+#### Benefits
+
+* Real-time communication
+* Efficient message delivery
+* No polling required
+* STOMP protocol support
+
+---
+
+### Layered Architecture
+
+```text
+Controller
+   ↓
+Service
+   ↓
+Messaging
+   ↓
+WebSocket
+```
+
+#### Benefits
+
+* Separation of concerns
+* Maintainability
+* Testability
+
+---
+
+### No Database
+
+#### Benefits
+
+* Simpler architecture
+* Focus on messaging and concurrency concepts
+* Reduced infrastructure requirements
+
+---
+
+## Project Structure
+
+```text
+com.jse.chat
+├── controller
+│   └── ChatController
+│
+├── service
+│   ├── ChatService
+│   └── ChatSessionService
+│
+├── messaging
+│   ├── MessageProducer
+│   ├── MessageConsumer
+│   └── MessageQueueConfig
+│
+├── websocket
+│   ├── MessageBroadcaster
+│   └── WebSocketConfig
+│
+├── domain
+│   └── ChatMessage
+│
+├── dto
+│   ├── SendMessageRequest
+│   └── JoinRequest
+│
+├── config
+│   ├── TimeConfig
+│   ├── ChatQueueProperties
+│   ├── ChatWebSocketProperties
+│   └── CorsProperties
+│
+└── exception
+    └── GlobalExceptionHandler
+```
+
+---
+
+## Concurrency Model
+
+```text
+Producer
+   ↓
+Bounded BlockingQueue
+   ↓
+Consumer Thread
+   ↓
+WebSocket Broadcast
+   ↓
+Connected Clients
+```
+
+The Producer publishes messages into a thread-safe queue while a dedicated Consumer thread processes and broadcasts messages asynchronously.
+
+---
+
+## Running the Application
+
+### Build
+
+```bash
+mvn clean install
+```
+
+### Run
+
+```bash
+mvn spring-boot:run
+```
+
+### Application URL
+
+```text
+http://localhost:8080
+```
+
+---
+
+## REST APIs
+
+### Join Chat
+
+**Endpoint**
+
+```http
+POST /api/chat/join
+```
+
+**Request Body**
+
+```json
+{
+  "username": "john"
+}
+```
+
+---
+
+### Send Message
+
+**Endpoint**
+
+```http
+POST /api/chat/send
+```
+
+**Request Body**
+
+```json
+{
+  "username": "john",
+  "content": "Hello World"
+}
+```
+
+---
+
+## WebSocket Configuration
+
+### Endpoint
+
+```text
+ws://localhost:8080/ws-chat
+```
+
+### Topic
+
+```text
+/topic/chat
+```
+
+Clients subscribe to `/topic/chat` to receive real-time messages.
+
+---
+
+## Message Processing Flow
+
+```text
+User
+   ↓
+REST API
+   ↓
+Validation
+   ↓
+Queue
+   ↓
+Consumer Thread
+   ↓
+WebSocket Broadcast
+```
+
+---
+
+## Testing Strategy
+
+### Controller Tests
+
+* MockMvc
+
+### Service Tests
+
+* Mockito
+
+### Messaging Tests
+
+* Queue behavior
+* Producer/Consumer validation
+
+### WebSocket Tests
+
+* MessageBroadcaster testing using mocked SimpMessagingTemplate
+
+### Session Management Tests
+
+* User join/leave scenarios
+* Active user tracking
+
+---
+
+## Tools & Frameworks
+
+* Java 17
+* Spring Boot 3.x
+* Spring WebSocket
+* STOMP
+* Lombok
+* JUnit 5
+* Mockito
+* MockMvc
+
+---
+
+## Key Learning Outcomes
+
+* Producer-Consumer Pattern
+* Concurrent Programming
+* WebSocket Communication
+* Thread-Safe Data Structures
+* Clean Architecture
+* Spring Boot Testing
+* Asynchronous Processing
+
+---
+
+## System Flow Diagram
+
+```text
+Client
+  │
+  ▼
+REST API
+  │
+  ▼
+ChatController
+  │
+  ▼
+ChatService
+  │
+  ▼
+MessageProducer
+  │
+  ▼
+BlockingQueue
+  │
+  ▼
+MessageConsumer
+  │
+  ▼
+MessageBroadcaster
+  │
+  ▼
+WebSocket Topic (/topic/chat)
+  │
+  ▼
+Connected Clients
+```
+
+---
+
+## Trade-Offs
+
+### Advantages
+
+* Simple and lightweight architecture
+* Real-time communication
+* No database dependency
+* Demonstrates concurrency and asynchronous processing
+* Easy to understand, maintain, and test
+
+### Limitations
+
+* Messages are lost after application restart
+* Single-instance deployment only
+* No authentication or authorization
+* No horizontal scaling without additional infrastructure
+
+```
+```
