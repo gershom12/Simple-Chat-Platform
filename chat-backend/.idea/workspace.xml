@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0c811011-929d-4483-b55f-148b3e2a7ea9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/README.MD" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/jse/chat/config/CorsProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/jse/chat/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/jse/chat/config/TimeConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/jse/chat/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/jse/chat/messaging/ChatQueueProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/jse/chat/service/ChatSessionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/jse/chat/websocket/ChatWebSocketProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/jse/chat/messaging/MessageConsumerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/jse/chat/messaging/MessageProducerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/jse/chat/service/ChatSessionServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/jse/chat/websocket/MessageBroadcasterTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat-frontend/.editorconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat-frontend/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat-frontend/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat-frontend/angular.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat-frontend/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat-frontend/src/app/app.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat-frontend/src/app/app.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat-frontend/src/app/app.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat-frontend/src/app/app.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat-frontend/src/app/core/config/app.config.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat-frontend/src/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat-frontend/src/main.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat-frontend/src/polyfills.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat-frontend/src/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat-frontend/tsconfig.app.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat-frontend/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat-frontend/tsconfig.spec.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="3FS3nIBTxgUkvRwESxJemiLEGjj" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.MessageBroadcasterTest.executor": "Run",
+    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/JSE/Simple-Chat-Platform/chat-frontend"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="MessageBroadcasterTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="chat-platform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.jse.chat.websocket.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.jse.chat.websocket" />
+      <option name="MAIN_CLASS_NAME" value="com.jse.chat.websocket.MessageBroadcasterTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="chat-backend" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="chat-backend" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.MessageBroadcasterTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0c811011-929d-4483-b55f-148b3e2a7ea9" name="Changes" comment="" />
+      <created>1782054810028</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1782054810028</updated>
+    </task>
+    <servers />
+  </component>
+</project>

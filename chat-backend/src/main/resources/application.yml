@@ -1,0 +1,17 @@
+app:
+  allowed:
+    origins:
+      - http://localhost:4200
+
+chat:
+  queue:
+    max-attempts: 3
+    timeout-ms: 500
+    capacity: 1000
+  websocket:
+    destination: /topic/chat
+    endpoint: /ws-chat
+    app-prefix: /app
+    broker-prefixes:
+      - /topic
+      - /queue

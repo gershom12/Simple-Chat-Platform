@@ -1,0 +1,62 @@
+<div class="chat-page">
+
+  <!-- LOGIN / JOIN SCREEN -->
+  <div class="join-card" *ngIf="!joined">
+    <h2>💬 Simple Chat</h2>
+
+    <input
+      [(ngModel)]="username"
+      placeholder="Enter username"
+    />
+
+    <button (click)="joinChat()">
+      Join Chat
+    </button>
+  </div>
+
+  <!-- CHAT SCREEN -->
+  <div class="chat-card" *ngIf="joined">
+
+    <!-- HEADER -->
+    <div class="chat-header">
+      <div class="title">💬 Chat Room</div>
+      <div class="user">👤 {{ username }}</div>
+    </div>
+
+    <!-- MESSAGES -->
+    <div class="messages">
+      <div
+        class="msg"
+        *ngFor="let msg of messages"
+      >
+        <div class="bubble">
+
+          <div class="meta">
+            <strong>{{ msg.username }}</strong>
+            <span>{{ msg.timestamp }}</span>
+          </div>
+
+          <div class="text">
+            {{ msg.content }}
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- INPUT AREA -->
+    <div class="chat-input">
+      <input
+        [(ngModel)]="message"
+        placeholder="Type a message..."
+        (keyup.enter)="sendMessage()"
+      />
+
+      <button (click)="sendMessage()">
+        Send
+      </button>
+    </div>
+
+  </div>
+
+</div>
